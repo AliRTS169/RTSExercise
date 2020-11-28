@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ali_RTS
+{
+    class AliRTS
+    {
+        public static void Main(string[] args)
+        {
+            int[] ints = new[] { 1, 5, 2, 1, 10 };
+            var outputBelowAbove = BelowAbove(ints, 6);
+
+            var outputRotateFunc = RotateFunc("MyString", 2);
+
+            Console.WriteLine(outputRotateFunc);
+            Console.WriteLine(outputBelowAbove);
+        }
+
+        //solution to Q1
+        //Print the number of integers in an array that are above the given input and the number that are below, e.g. for the array[1, 5, 2, 1, 10] with input 6, print “above: 1, below: 4”.
+        public static string BelowAbove(Array inputList, int inputVal)
+        {
+            List<int> lst = inputList.OfType<int>().ToList();
+            int above = lst.Where(x => x > inputVal).Count();
+            int below = lst.Where(x => x < inputVal).Count();
+
+            var output = "above:" + above + ", below:" + below;
+
+            return output;
+        }
+
+        //solution to Q2
+        //Rotate the characters in a string by a given input and have the overflow appear at the beginning, e.g. “MyString” rotated by 2 is “ngMyStri”.
+        public static string RotateFunc(string str, int rotator)
+        {
+            var len = str.Length;
+            int startOverflowIndex = len - rotator;
+            string overFlow = str.Substring(startOverflowIndex, rotator);
+            int remainder = len - rotator;
+            string starter = str.Substring(0, remainder);
+            string output = overFlow + starter;
+            return output;
+
+        }
+        
+    }
+}
